@@ -6,10 +6,19 @@ it('shows the fruit returned by the server', () => {
   //
   // visit the page
   // https://on.cypress.io/visit
+
+    cy.intercept('GET', '/fruit').as('fruit');
+    cy.visit('/');
   //
   // wait for the app to make the network call
-  // (there might be a delay)
-  // https://on.cypress.io/wait
+    // (there might be a delay)
+    // https://on.cypress.io/wait
+    cy.wait('@fruit').its('response.body.fruit')
+        .then(cy.log)
+        .then((fruit) => {
+            cy.contains('#fruit', fruit)
+        });
+
   //
   // from the network call, get the response body
   // and the name of the fruit and confirm
@@ -17,4 +26,5 @@ it('shows the fruit returned by the server', () => {
   // https://on.cypress.io/its
   // https://on.cypress.io/then
   // https://on.cypress.io/contains
-})
+
+});

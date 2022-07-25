@@ -3,6 +3,7 @@ const { defineConfig } = require('cypress')
 module.exports = defineConfig({
   viewportWidth: 400,
   viewportHeight: 300,
+  watchForFileChanges: false,
   e2e: {
     setupNodeEvents(on, config) {},
     supportFile: false,
